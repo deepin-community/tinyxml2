@@ -1,3 +1,61 @@
+tinyxml2 (11.0.0+dfsg-1) unstable; urgency=medium
+
+  * [cb69d19] New upstream version 11.0.0+dfsg
+  * [b97c731] Rename package for soname bump
+
+ -- Chow Loong Jin <hyperair@debian.org>  Mon, 17 Mar 2025 15:44:04 +0800
+
+tinyxml2 (10.1.0+dfsg-1) unstable; urgency=medium
+
+  * [e3fe268] New upstream version 10.1.0+dfsg
+    - Fixes CVE-2024-50615 (Closes: #1088814)
+  * [4b330c9] Refresh patches
+  * [870daa6] Update watch file to version 4 and use example from uscan manpage
+
+ -- Chow Loong Jin <hyperair@debian.org>  Fri, 14 Mar 2025 12:49:48 +0800
+
+tinyxml2 (10.0.0+dfsg-2) unstable; urgency=medium
+
+  [ Jenkins ]
+  * [c0b0d65] Set upstream metadata fields: Bug-Database, Bug-Submit,
+    Repository, Repository-Browse.
+    Changes-By: lintian-brush
+    Fixes: lintian: upstream-metadata-file-is-missing
+    Fixes: lintian: upstream-metadata-missing-bug-tracking
+    Fixes: lintian: upstream-metadata-missing-repository
+  * [089faba] Remove Section on libtinyxml2-9 that duplicates source.
+    Changes-By: lintian-brush
+    Fixes: lintian: binary-control-field-duplicates-source
+
+  [ Debian Janitor ]
+  * [5c99140] Use secure URI in Homepage field.
+    Changes-By: lintian-brush
+    Fixes: lintian: homepage-field-uses-insecure-uri
+  * [f16bddf] Bump debhelper from old 12 to 13.
+    Changes-By: lintian-brush
+    Fixes: lintian: package-uses-old-debhelper-compat-version
+  * [b8747ae] Remove constraints unnecessary since buster (oldstable)
+    * Build-Depends: Drop versioned constraint on dpkg-dev.
+    Changes-By: deb-scrub-obsolete
+
+ -- Chow Loong Jin <hyperair@debian.org>  Fri, 05 Jan 2024 23:29:38 +0800
+
+tinyxml2 (10.0.0+dfsg-1) unstable; urgency=medium
+
+  * [31b2418] New upstream version 10.0.0+dfsg
+  * [b38f32c] Refresh patches
+  * [d00e929] Rename binary package for soname bump
+  * [70c9b49] Update symbols file
+
+ -- Chow Loong Jin <hyperair@debian.org>  Fri, 05 Jan 2024 23:29:34 +0800
+
+tinyxml2 (9.0.0+dfsg-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Install cmake files (Closes: #967045)
+
+ -- Jochen Sprickerhof <jspricke@debian.org>  Mon, 16 May 2022 11:14:34 +0200
+
 tinyxml2 (9.0.0+dfsg-3) unstable; urgency=medium
 
   * [a6e98f0] Drop Provides/Conflicts libtinyxml2-8 (Closes: #992602)
