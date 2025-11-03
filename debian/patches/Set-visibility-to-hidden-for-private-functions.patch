@@ -9,18 +9,18 @@ are defined in the header.
  1 file changed, 49 insertions(+), 46 deletions(-)
 
 diff --git a/tinyxml2.h b/tinyxml2.h
-index 05848da..ddd84e8 100755
+index 3d65f7f..9a3c9c5 100644
 --- a/tinyxml2.h
 +++ b/tinyxml2.h
-@@ -65,6 +65,7 @@ distribution.
+@@ -62,6 +62,7 @@ distribution.
  #endif
  
- #ifdef _WIN32
+ #ifdef _MSC_VER
 +#   define TINYXML2_PRIVATE
  #   ifdef TINYXML2_EXPORT
  #       define TINYXML2_LIB __declspec(dllexport)
  #   elif defined(TINYXML2_IMPORT)
-@@ -74,8 +75,10 @@ distribution.
+@@ -71,8 +72,10 @@ distribution.
  #   endif
  #elif __GNUC__ >= 4
  #   define TINYXML2_LIB __attribute__((visibility("default")))
@@ -31,7 +31,7 @@ index 05848da..ddd84e8 100755
  #endif
  
  
-@@ -181,7 +184,7 @@ public:
+@@ -178,7 +181,7 @@ public:
  	void Reset();
  
  private:
@@ -40,7 +40,7 @@ index 05848da..ddd84e8 100755
  
      enum {
          NEEDS_FLUSH = 0x100,
-@@ -192,8 +195,8 @@ private:
+@@ -189,8 +192,8 @@ private:
      char*   _start;
      char*   _end;
  
@@ -51,7 +51,7 @@ index 05848da..ddd84e8 100755
  };
  
  
-@@ -297,10 +300,10 @@ public:
+@@ -293,10 +296,10 @@ public:
      }
  
  private:
@@ -60,12 +60,12 @@ index 05848da..ddd84e8 100755
 +    TINYXML2_PRIVATE DynArray( const DynArray& ); // not supported
 +    TINYXML2_PRIVATE void operator=( const DynArray& ); // not supported
  
--    void EnsureCapacity( int cap ) {
-+    TINYXML2_PRIVATE void EnsureCapacity( int cap ) {
+-    void EnsureCapacity( size_t cap ) {
++    TINYXML2_PRIVATE void EnsureCapacity( size_t cap ) {
          TIXMLASSERT( cap > 0 );
          if ( cap > _allocated ) {
-             TIXMLASSERT( cap <= INT_MAX / 2 );
-@@ -438,8 +441,8 @@ public:
+             TIXMLASSERT( cap <= SIZE_MAX / 2 / sizeof(T));
+@@ -434,8 +437,8 @@ public:
      enum { ITEMS_PER_BLOCK = (4 * 1024) / ITEM_SIZE };
  
  private:
@@ -76,7 +76,7 @@ index 05848da..ddd84e8 100755
  
      union Item {
          Item*   next;
-@@ -966,13 +969,13 @@ protected:
+@@ -968,13 +971,13 @@ protected:
  
  private:
      MemPool*		_memPool;
@@ -96,7 +96,7 @@ index 05848da..ddd84e8 100755
  };
  
  
-@@ -1022,8 +1025,8 @@ protected:
+@@ -1024,8 +1027,8 @@ protected:
  private:
      bool _isCData;
  
@@ -107,8 +107,8 @@ index 05848da..ddd84e8 100755
  };
  
  
-@@ -1051,8 +1054,8 @@ protected:
-     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr);
+@@ -1053,8 +1056,8 @@ protected:
+     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr) override;
  
  private:
 -    XMLComment( const XMLComment& );	// not supported
@@ -118,8 +118,8 @@ index 05848da..ddd84e8 100755
  };
  
  
-@@ -1090,8 +1093,8 @@ protected:
-     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr );
+@@ -1092,8 +1095,8 @@ protected:
+     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr ) override;
  
  private:
 -    XMLDeclaration( const XMLDeclaration& );	// not supported
@@ -129,8 +129,8 @@ index 05848da..ddd84e8 100755
  };
  
  
-@@ -1125,8 +1128,8 @@ protected:
-     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr );
+@@ -1127,8 +1130,8 @@ protected:
+     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr ) override;
  
  private:
 -    XMLUnknown( const XMLUnknown& );	// not supported
@@ -140,7 +140,7 @@ index 05848da..ddd84e8 100755
  };
  
  
-@@ -1240,14 +1243,14 @@ public:
+@@ -1242,14 +1245,14 @@ public:
  private:
      enum { BUF_SIZE = 200 };
  
@@ -161,8 +161,8 @@ index 05848da..ddd84e8 100755
  
      mutable StrPair _name;
      mutable StrPair _value;
-@@ -1683,15 +1686,15 @@ protected:
-     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr );
+@@ -1685,15 +1688,15 @@ protected:
+     char* ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr ) override;
  
  private:
 -    XMLElement( XMLDocument* doc );
@@ -184,7 +184,7 @@ index 05848da..ddd84e8 100755
  
      enum { BUF_SIZE = 200 };
      ElementClosingType _closingType;
-@@ -1928,8 +1931,8 @@ public:
+@@ -1931,8 +1934,8 @@ public:
      }
  
  private:
@@ -195,7 +195,7 @@ index 05848da..ddd84e8 100755
  
      bool			_writeBOM;
      bool			_processEntities;
-@@ -1955,9 +1958,9 @@ private:
+@@ -1958,9 +1961,9 @@ private:
  
  	static const char* _errorNames[XML_ERROR_COUNT];
  
@@ -207,7 +207,7 @@ index 05848da..ddd84e8 100755
  
  	// Something of an obvious security hole, once it was discovered.
  	// Either an ill-formed XML or an excessively deep one can overflow
-@@ -1974,11 +1977,11 @@ private:
+@@ -1977,11 +1980,11 @@ private:
  	private:
  		XMLDocument * _document;
  	};
@@ -216,13 +216,13 @@ index 05848da..ddd84e8 100755
 +	TINYXML2_PRIVATE void PushDepth();
 +	TINYXML2_PRIVATE void PopDepth();
  
-     template<class NodeType, int PoolElementSize>
+     template<class NodeType, size_t PoolElementSize>
 -    NodeType* CreateUnlinkedNode( MemPoolT<PoolElementSize>& pool );
 +    TINYXML2_PRIVATE NodeType* CreateUnlinkedNode( MemPoolT<PoolElementSize>& pool );
  };
  
- template<class NodeType, int PoolElementSize>
-@@ -2346,8 +2349,8 @@ private:
+ template<class NodeType, size_t PoolElementSize>
+@@ -2349,8 +2352,8 @@ private:
         Prepares to write a new node. This includes sealing an element that was
         just opened, and writing any whitespace necessary if not in compact mode.
       */
@@ -233,7 +233,7 @@ index 05848da..ddd84e8 100755
  
      bool _firstElement;
      FILE* _fp;
-@@ -2366,8 +2369,8 @@ private:
+@@ -2369,8 +2372,8 @@ private:
      DynArray< char, 20 > _buffer;
  
      // Prohibit cloning, intentionally not implemented
