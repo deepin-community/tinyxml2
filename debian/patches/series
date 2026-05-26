@@ -1,1 +1,2 @@
 Set-visibility-to-hidden-for-private-functions.patch
+Fix-potential-overflow-in-char-refs-CVE-2024-50614-50615.patch
