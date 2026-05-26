@@ -1,3 +1,11 @@
+tinyxml2 (9.0.0+dfsg-3deepin1) unstable; urgency=medium
+
+  * Fix potential overflow in char refs (CVE-2024-50614, CVE-2024-50615)
+    - Patch from upstream commit 494735de30c9
+    - Fixes reachable assertion in XMLUtil::GetCharacterRef
+
+ -- deepin-ci-robot <packages@deepin.org>  Tue, 26 May 2026 23:30:00 +0800
+
 tinyxml2 (9.0.0+dfsg-3) unstable; urgency=medium
 
   * [a6e98f0] Drop Provides/Conflicts libtinyxml2-8 (Closes: #992602)
