@@ -1,3 +1,11 @@
+tinyxml2 (9.0.0+dfsg-3deepin2) unstable; urgency=medium
+
+  * Mark CVE-2018-11210 as not-affected: upstream determined
+    the reported overflow is due to improper use of the library
+    and not a vulnerability in tinyxml2.
+
+ -- deepin-ci-robot <packages@deepin.org>  Wed, 08 Jul 2026 15:46:00 +0800
+
 tinyxml2 (9.0.0+dfsg-3deepin1) unstable; urgency=medium
 
   * Fix potential overflow in char refs (CVE-2024-50614, CVE-2024-50615)
